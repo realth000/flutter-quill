@@ -112,6 +112,12 @@ class QuillToolbarLinkStyleButtonState
   Future<void> _openLinkDialog(BuildContext context) async {
     final initialTextLink = QuillTextLink.prepare(widget.controller);
 
+    final customCallback = options.customOnPressedCallback;
+    if (customCallback != null) {
+      await customCallback(controller);
+      return;
+    }
+
     final textLink = await showDialog<QuillTextLink>(
       context: context,
       barrierColor: dialogBarrierColor,
