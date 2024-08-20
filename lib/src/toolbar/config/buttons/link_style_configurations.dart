@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart' show Color;
 
+import '../../../controller/quill_controller.dart';
 import '../../base_toolbar.dart';
 import '../../structs/link_dialog_action.dart';
 import '../../theme/quill_dialog_theme.dart';
@@ -29,10 +30,16 @@ class QuillToolbarLinkStyleButtonOptions extends QuillToolbarBaseButtonOptions<
     super.tooltip,
     super.iconTheme,
     super.childBuilder,
+    this.customOnPressedCallback,
   });
 
   final QuillDialogTheme? dialogTheme;
   final RegExp? linkRegExp;
   final LinkDialogAction? linkDialogAction;
   final Color? dialogBarrierColor;
+  final QuillToolbarLinkButtonOnPressedCallback? customOnPressedCallback;
 }
+
+typedef QuillToolbarLinkButtonOnPressedCallback = Future<void> Function(
+  QuillController controller,
+);
