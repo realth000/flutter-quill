@@ -435,39 +435,44 @@ class QuillRawEditorState extends EditorState
       final baselinePadding =
           EdgeInsets.only(top: _styles!.paragraph!.verticalSpacing.top);
       child = BaselineProxy(
-        textStyle: _styles!.paragraph!.style,
-        padding: baselinePadding,
-        child: _scribbleFocusable(
-          SingleChildScrollView(
-            controller: _scrollController,
-            physics: widget.configurations.scrollPhysics,
-            child: MouseRegion(
-              cursor: widget.configurations.readOnly
-                  ? widget.configurations.readOnlyMouseCursor
-                  : SystemMouseCursors.text,
-              child: QuillRawEditorMultiChildRenderObject(
-                key: _editorKey,
-                document: doc,
-                selection: controller.selection,
-                hasFocus: _hasFocus,
-                scrollable: widget.configurations.scrollable,
-                textDirection: _textDirection,
-                startHandleLayerLink: _startHandleLayerLink,
-                endHandleLayerLink: _endHandleLayerLink,
-                onSelectionChanged: _handleSelectionChanged,
-                onSelectionCompleted: _handleSelectionCompleted,
-                scrollBottomInset: widget.configurations.scrollBottomInset,
-                padding: widget.configurations.padding,
-                maxContentWidth: widget.configurations.maxContentWidth,
-                cursorController: _cursorCont,
-                floatingCursorDisabled:
-                    widget.configurations.floatingCursorDisabled,
-                children: _buildChildren(doc, context),
+          textStyle: _styles!.paragraph!.style,
+          padding: baselinePadding,
+          child: _scribbleFocusable(
+            SingleChildScrollView(
+              controller: _scrollController,
+              physics: widget.configurations.scrollPhysics,
+              child: CompositedTransformTarget(
+                link: _toolbarLayerLink,
+                child: MouseRegion(
+                  cursor: widget.configurations.readOnly
+                      ? widget.configurations.readOnlyMouseCursor
+                      : SystemMouseCursors.text,
+                  child: QuillRawEditorMultiChildRenderObject(
+                    key: _editorKey,
+                    offset: _scrollController.hasClients
+                        ? _scrollController.position
+                        : null,
+                    document: doc,
+                    selection: controller.selection,
+                    hasFocus: _hasFocus,
+                    scrollable: widget.configurations.scrollable,
+                    textDirection: _textDirection,
+                    startHandleLayerLink: _startHandleLayerLink,
+                    endHandleLayerLink: _endHandleLayerLink,
+                    onSelectionChanged: _handleSelectionChanged,
+                    onSelectionCompleted: _handleSelectionCompleted,
+                    scrollBottomInset: widget.configurations.scrollBottomInset,
+                    padding: widget.configurations.padding,
+                    maxContentWidth: widget.configurations.maxContentWidth,
+                    cursorController: _cursorCont,
+                    floatingCursorDisabled:
+                        widget.configurations.floatingCursorDisabled,
+                    children: _buildChildren(doc, context),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-      );
+          ));
     } else {
       child = _scribbleFocusable(
         CompositedTransformTarget(
@@ -501,7 +506,6 @@ class QuillRawEditorState extends EditorState
         ),
       );
     }
-
     final constraints = widget.configurations.expands
         ? const BoxConstraints.expand()
         : BoxConstraints(
@@ -509,11 +513,7 @@ class QuillRawEditorState extends EditorState
             maxHeight: widget.configurations.maxHeight ?? double.infinity,
           );
 
-    // Please notice that this change will make the check fixed
-    // so if we ovveride the platform in material app theme data
-    // it will not depend on it and doesn't change here but I don't think
-    // we need to
-    final isDesktopMacOS = isMacOS(supportWeb: true);
+    final isDesktopMacOS = isMacOS;
 
     return TextFieldTapRegion(
       enabled: widget.configurations.isOnTapOutsideEnabled,
@@ -805,8 +805,12 @@ class QuillRawEditorState extends EditorState
       if (widget.configurations.readOnly) {
         return KeyEventResult.ignored;
       }
-      controller.replaceText(controller.selection.baseOffset, 0, '\t', null);
-      _moveCursor(1);
+      if (widget.configurations.enableAlwaysIndentOnTab) {
+        controller.indentSelection(!HardwareKeyboard.instance.isShiftPressed);
+      } else {
+        controller.replaceText(controller.selection.baseOffset, 0, '\t', null);
+        _moveCursor(1);
+      }
       return KeyEventResult.handled;
     }
 
@@ -1187,9 +1191,9 @@ class QuillRawEditorState extends EditorState
     _floatingCursorResetController = AnimationController(vsync: this);
     _floatingCursorResetController.addListener(onFloatingCursorResetTick);
 
-    if (isKeyboardOS(supportWeb: true)) {
+    if (isKeyboardOS) {
       _keyboardVisible = true;
-    } else if (!isWeb() && isFlutterTest()) {
+    } else if (!kIsWeb && isFlutterTest) {
       // treat tests like a keyboard OS
       _keyboardVisible = true;
     } else {
@@ -1352,7 +1356,7 @@ class QuillRawEditorState extends EditorState
   }
 
   void _didChangeTextEditingValue([bool ignoreFocus = false]) {
-    if (isWeb()) {
+    if (kIsWeb) {
       _onChangeTextEditingValue(ignoreFocus);
       if (!ignoreFocus) {
         requestKeyboard();
@@ -1572,7 +1576,7 @@ class QuillRawEditorState extends EditorState
     // toolbar: copy, paste, select, cut. It might also provide additional
     // functionality depending on the browser (such as translate). Due to this
     // we should not show a Flutter toolbar for the editable text elements.
-    if (isWeb()) {
+    if (kIsWeb) {
       return false;
     }
 

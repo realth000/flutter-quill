@@ -4,6 +4,63 @@
 
 All notable changes to this project will be documented in this file.
 
+## 10.5.9
+
+* chore: improve platform check by using constants and defaultTargetPlatform by @EchoEllet in https://github.com/singerdmx/flutter-quill/pull/2188
+
+
+**Full Changelog**: https://github.com/singerdmx/flutter-quill/compare/v10.5.8...v10.5.9
+
+## 10.5.8
+
+* Feat: Add configuration option to always indent on TAB key press by @agata in https://github.com/singerdmx/flutter-quill/pull/2187
+
+## New Contributors
+* @agata made their first contribution in https://github.com/singerdmx/flutter-quill/pull/2187
+
+**Full Changelog**: https://github.com/singerdmx/flutter-quill/compare/v10.5.7...v10.5.8
+
+## 10.5.7
+
+* chore(example): downgrade Kotlin from 1.9.24 to 1.7.10 by @EchoEllet in https://github.com/singerdmx/flutter-quill/pull/2185
+* style: refactor build leading function style, width, and padding parameters for custom node leading builder by @EchoEllet in https://github.com/singerdmx/flutter-quill/pull/2182
+
+
+**Full Changelog**: https://github.com/singerdmx/flutter-quill/compare/v10.5.6...v10.5.7
+
+## 10.5.6
+
+* chore(deps): update super_clipboard to 0.8.20 in flutter_quill_extensions by @EchoEllet in https://github.com/singerdmx/flutter-quill/pull/2181
+* Update quill_screen.dart, i chaged the logic for showing a lock when … by @rightpossible in https://github.com/singerdmx/flutter-quill/pull/2183
+
+## New Contributors
+* @rightpossible made their first contribution in https://github.com/singerdmx/flutter-quill/pull/2183
+
+**Full Changelog**: https://github.com/singerdmx/flutter-quill/compare/v10.5.5...v10.5.6
+
+## 10.5.5
+
+* Fix text selection handles when scroll mobile by @AtlasAutocode in https://github.com/singerdmx/flutter-quill/pull/2176
+
+
+**Full Changelog**: https://github.com/singerdmx/flutter-quill/compare/v10.5.4...v10.5.5
+
+## 10.5.4
+
+* Add Thai (th) localization by @silkyland in https://github.com/singerdmx/flutter-quill/pull/2175
+
+## New Contributors
+* @silkyland made their first contribution in https://github.com/singerdmx/flutter-quill/pull/2175
+
+**Full Changelog**: https://github.com/singerdmx/flutter-quill/compare/v10.5.3...v10.5.4
+
+## 10.5.3
+
+* Fix: Assertion Failure in line.dart When Editing Text with Block-Level Attributes by @AtlasAutocode in https://github.com/singerdmx/flutter-quill/pull/2174
+
+
+**Full Changelog**: https://github.com/singerdmx/flutter-quill/compare/v10.5.2...v10.5.3
+
 ## 10.5.2
 
 * fix(toolbar): regard showDividers in simple toolbar by @realth000 in https://github.com/singerdmx/flutter-quill/pull/2172
