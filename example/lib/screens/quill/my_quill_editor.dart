@@ -127,16 +127,6 @@ class MyQuillEditor extends StatelessWidget {
                       );
                     },
                   ),
-                  videoEmbedConfigurations: QuillEditorVideoEmbedConfigurations(
-                    customVideoBuilder: (videoUrl, readOnly) {
-                      // Example: Check for YouTube Video URL and return your
-                      // YouTube video widget here.
-
-                      // Otherwise return null to fallback to the defualt logic
-                      return null;
-                    },
-                    ignoreYouTubeSupport: true,
-                  ),
                 )),
           TimeStampEmbedBuilderWidget(),
         ],

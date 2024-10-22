@@ -18,11 +18,6 @@ export 'src/editor/spell_checker/simple_spell_checker_service.dart';
 export 'src/editor/table/table_cell_embed.dart';
 export 'src/editor/table/table_embed.dart';
 export 'src/editor/table/table_models.dart';
-export 'src/editor/video/models/video_configurations.dart';
-export 'src/editor/video/models/video_web_configurations.dart';
-export 'src/editor/video/models/youtube_video_support_mode.dart';
-export 'src/editor/video/video_embed.dart';
-export 'src/editor/video/video_web_embed.dart';
 export 'src/editor_toolbar_shared/shared_configurations.dart';
 export 'src/flutter_quill_embeds.dart';
 export 'src/toolbar/camera/camera_button.dart';
@@ -34,9 +29,6 @@ export 'src/toolbar/image/image_button.dart';
 export 'src/toolbar/image/models/image_configurations.dart';
 export 'src/toolbar/table/models/table_configurations.dart';
 export 'src/toolbar/table/table_button.dart';
-export 'src/toolbar/video/models/video.dart';
-export 'src/toolbar/video/models/video_configurations.dart';
-export 'src/toolbar/video/video_button.dart';
 
 @Deprecated(
   'Should not be used as will removed soon in future releases.',
