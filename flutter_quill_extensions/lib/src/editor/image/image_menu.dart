@@ -179,18 +179,6 @@ class ImageOptionsMenu extends StatelessWidget {
                 return;
               }
 
-              if (result.isGallerySave) {
-                messenger.showSnackBar(SnackBar(
-                  content: Text(localizations.successImageSavedGallery),
-                  action: SnackBarAction(
-                    label: localizations.openGallery,
-                    onPressed: () =>
-                        QuillNativeProvider.instance.openGalleryApp(),
-                  ),
-                ));
-                return;
-              }
-
               if (isDesktopApp) {
                 final imageFilePath = result.imageFilePath;
                 if (imageFilePath == null) {

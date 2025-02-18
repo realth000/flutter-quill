@@ -4,7 +4,6 @@ library;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_quill/internal.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 
@@ -96,18 +95,7 @@ String getDefaultImageFileName({required bool isGallerySave}) {
 }
 
 Future<bool> shouldSaveToGallery({required bool prefersGallerySave}) async {
-  final supportsGallerySave = await QuillNativeProvider.instance
-      .isSupported(QuillNativeBridgeFeature.saveImageToGallery);
-  if (!supportsGallerySave) {
-    return false;
-  }
-  final supportsImageSave = await QuillNativeProvider.instance
-      .isSupported(QuillNativeBridgeFeature.saveImage);
-  if (!supportsImageSave) {
-    return true;
-  }
-
-  return supportsGallerySave && prefersGallerySave;
+  return false;
 }
 
 /// Thrown when the gallery image save operation is denied
@@ -175,33 +163,8 @@ class ImageSaver {
       return null;
     }
 
-    if (kIsWeb) {
-      await QuillNativeProvider.instance.saveImage(
-        imageBytes,
-        options: ImageSaveOptions(
-            name: imageName ?? getDefaultImageFileName(isGallerySave: false),
-            fileExtension: imageFileExtension),
-      );
-      return const SaveImageResult(
-        imageFilePath: null,
-        isGallerySave: false,
-      );
-    }
-
     if (await shouldSaveToGallery(prefersGallerySave: prefersGallerySave)) {
       try {
-        await QuillNativeProvider.instance.saveImageToGallery(
-          imageBytes,
-          options: GalleryImageSaveOptions(
-            name: imageName ?? getDefaultImageFileName(isGallerySave: true),
-            fileExtension: imageFileExtension,
-            // Specifying the album name requires read-write permission
-            // on iOS and macOS on all versions. Pass null to request add-only on
-            // supported versions (previous versions still use read-write).
-            albumName: null,
-          ),
-        );
-
         return const SaveImageResult(
           imageFilePath: null,
           isGallerySave: true,
@@ -229,24 +192,6 @@ class ImageSaver {
         }
         rethrow;
       }
-    }
-
-    if (await QuillNativeProvider.instance
-        .isSupported(QuillNativeBridgeFeature.saveImage)) {
-      assert(!isMobileApp,
-          'Mobile platforms support saving images to the gallery only');
-
-      final result = await QuillNativeProvider.instance.saveImage(
-        imageBytes,
-        options: ImageSaveOptions(
-          name: imageName ?? getDefaultImageFileName(isGallerySave: false),
-          fileExtension: imageFileExtension,
-        ),
-      );
-      return SaveImageResult(
-        imageFilePath: result.filePath,
-        isGallerySave: false,
-      );
     }
 
     throw StateError('Image save is not handled on $defaultTargetPlatform');
