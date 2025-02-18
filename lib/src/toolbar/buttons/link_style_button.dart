@@ -4,7 +4,6 @@ import '../../editor/widgets/link.dart';
 import '../../l10n/extensions/localizations_ext.dart';
 import '../../rules/insert.dart';
 import '../base_button/base_value_button.dart';
-
 import '../config/buttons/link_style_options.dart';
 import '../structs/link_dialog_action.dart';
 import '../theme/quill_dialog_theme.dart';
@@ -100,6 +99,12 @@ class QuillToolbarLinkStyleButtonState
   }
 
   Future<void> _openLinkDialog(BuildContext context) async {
+    final customCallback = options.customOnPressedCallback;
+    if (customCallback != null) {
+      await customCallback(controller);
+      return;
+    }
+
     final initialTextLink = QuillTextLink.prepare(widget.controller);
 
     final textLink = await showDialog<QuillTextLink>(
