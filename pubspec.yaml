@@ -6,6 +6,7 @@ repository: https://github.com/singerdmx/flutter-quill/
 issue_tracker: https://github.com/singerdmx/flutter-quill/issues/
 documentation: https://github.com/singerdmx/flutter-quill/
 topics: [ editor, text, rich-text-editor, quill, flutter-quill ]
+publish_to: none
 
 screenshots:
   - description: "iOS Light Mode"
@@ -35,6 +36,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  dart_bbcode_web_colors:
+    path: ../../../dart_bbcode_web_colors
   dart_quill_delta: ^10.0.0
   collection: ^1.17.0
   quiver: ^3.2.0
