@@ -14,7 +14,7 @@ Color stringToColor(String? s, [Color? originalColor, DefaultStyles? defaultStyl
 
   final color = s.toColor();
   if (color != null) {
-    return color;
+    return Color(color);
   }
 
   // TODO: take care of "color": "inherit"
