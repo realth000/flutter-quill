@@ -22,5 +22,12 @@ Color stringToColor(String? s, [Color? originalColor, DefaultStyles? defaultStyl
     return originalColor ?? Colors.black;
   }
 
-  throw UnsupportedError('unknown color format "$s"');
+  if (!s.startsWith('#')) {
+    throw UnsupportedError('Color code not supported');
+  }
+
+  var hex = s.replaceFirst('#', '');
+  hex = hex.length == 6 ? 'ff$hex' : hex;
+  final val = int.parse(hex, radix: 16);
+  return Color(val);
 }
