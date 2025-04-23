@@ -41,6 +41,8 @@ dependencies:
   meta: ^1.7.0
   html: ^0.15.0
   intl: '>=0.19.0 <0.21.0'
+  dart_bbcode_web_colors:
+    path: ../../../dart_bbcode_web_colors
 
   flutter_colorpicker: ^1.1.0
 
