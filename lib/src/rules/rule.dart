@@ -61,8 +61,8 @@ class Rules {
     PreserveBlockStyleOnInsertRule(),
     PreserveLineStyleOnSplitRule(),
     ResetLineFormatOnNewLineRule(),
-    AutoFormatLinksRule(),
-    AutoFormatMultipleLinksRule(),
+    // AutoFormatLinksRule(),
+    // AutoFormatMultipleLinksRule(),
     PreserveInlineStylesRule(),
     CatchAllInsertRule(),
     EnsureEmbedLineRule(),
@@ -90,8 +90,7 @@ class Rules {
         continue;
       }
       try {
-        final result = rule.apply(document, index,
-            len: len, data: data, attribute: attribute);
+        final result = rule.apply(document, index, len: len, data: data, attribute: attribute);
         if (result != null) {
           return result..trim();
         }
