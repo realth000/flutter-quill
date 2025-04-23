@@ -3,19 +3,15 @@ import 'package:flutter/material.dart';
 import '../../../editor/widgets/link.dart';
 import '../../../l10n/extensions/localizations_ext.dart';
 import '../../base_button/base_value_button.dart';
-
 import '../../config/buttons/link_style_options.dart';
 import '../quill_icon_button.dart';
 import 'link_dialog.dart';
 
-typedef QuillToolbarLinkStyleBaseButton = QuillToolbarBaseButton<
-    QuillToolbarLinkStyleButtonOptions,
-    QuillToolbarLinkStyleButtonExtraOptions>;
+typedef QuillToolbarLinkStyleBaseButton
+    = QuillToolbarBaseButton<QuillToolbarLinkStyleButtonOptions, QuillToolbarLinkStyleButtonExtraOptions>;
 
-typedef QuillToolbarLinkStyleBaseButtonState<
-        W extends QuillToolbarLinkStyleBaseButton>
-    = QuillToolbarCommonButtonState<W, QuillToolbarLinkStyleButtonOptions,
-        QuillToolbarLinkStyleButtonExtraOptions>;
+typedef QuillToolbarLinkStyleBaseButtonState<W extends QuillToolbarLinkStyleBaseButton>
+    = QuillToolbarCommonButtonState<W, QuillToolbarLinkStyleButtonOptions, QuillToolbarLinkStyleButtonExtraOptions>;
 
 class QuillToolbarLinkStyleButton extends QuillToolbarLinkStyleBaseButton {
   const QuillToolbarLinkStyleButton({
@@ -29,12 +25,10 @@ class QuillToolbarLinkStyleButton extends QuillToolbarLinkStyleBaseButton {
   });
 
   @override
-  QuillToolbarLinkStyleButtonState createState() =>
-      QuillToolbarLinkStyleButtonState();
+  QuillToolbarLinkStyleButtonState createState() => QuillToolbarLinkStyleButtonState();
 }
 
-class QuillToolbarLinkStyleButtonState
-    extends QuillToolbarLinkStyleBaseButtonState {
+class QuillToolbarLinkStyleButtonState extends QuillToolbarLinkStyleBaseButtonState {
   @override
   String get defaultTooltip => context.loc.insertURL;
 
@@ -98,6 +92,12 @@ class QuillToolbarLinkStyleButtonState
   }
 
   Future<void> _openLinkDialog(BuildContext context) async {
+    final customCallback = options.customOnPressedCallback;
+    if (customCallback != null) {
+      await customCallback(controller);
+      return;
+    }
+
     final initialTextLink = QuillTextLink.prepare(widget.controller);
 
     final textLink = await showDialog<QuillTextLink>(
