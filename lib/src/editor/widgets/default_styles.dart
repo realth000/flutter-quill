@@ -149,8 +149,7 @@ class InlineCodeStyle {
   }
 
   @override
-  int get hashCode => Object.hash(style, header1, header2, header3, header4,
-      header5, header6, backgroundColor, radius);
+  int get hashCode => Object.hash(style, header1, header2, header3, header4, header5, header6, backgroundColor, radius);
 }
 
 @immutable
@@ -163,8 +162,7 @@ class DefaultListBlockStyle extends DefaultTextBlockStyle {
     super.decoration,
     this.checkboxUIBuilder, {
     this.indentWidthBuilder = TextBlockUtils.defaultIndentWidthBuilder,
-    this.numberPointWidthBuilder =
-        TextBlockUtils.defaultNumberPointWidthBuilder,
+    this.numberPointWidthBuilder = TextBlockUtils.defaultNumberPointWidthBuilder,
   });
 
   final QuillCheckboxBuilder? checkboxUIBuilder;
@@ -207,6 +205,7 @@ class DefaultStyles {
     this.sizeLarge,
     this.sizeHuge,
     this.palette,
+    this.bbcodeSpoilerV2,
   });
 
   final DefaultTextBlockStyle? h1;
@@ -242,6 +241,7 @@ class DefaultStyles {
   final DefaultTextBlockStyle? indent;
   final DefaultTextBlockStyle? align;
   final DefaultTextBlockStyle? leading;
+  final DefaultTextBlockStyle? bbcodeSpoilerV2;
 
   /// Custom palette of colors
   final Map<String, Color>? palette;
@@ -487,6 +487,20 @@ class DefaultStyles {
       sizeSmall: const TextStyle(fontSize: 10),
       sizeLarge: const TextStyle(fontSize: 18),
       sizeHuge: const TextStyle(fontSize: 22),
+      bbcodeSpoilerV2: DefaultTextBlockStyle(
+          TextStyle(
+            color: Colors.blue.shade900.withValues(alpha: 0.9),
+            fontFamily: fontFamily,
+            fontSize: 13,
+            height: 1.15,
+          ),
+          baseHorizontalSpacing,
+          baseVerticalSpacing,
+          VerticalSpacing.zero,
+          BoxDecoration(
+            color: Colors.grey.shade50,
+            borderRadius: BorderRadius.circular(2),
+          )),
     );
   }
 
@@ -524,6 +538,7 @@ class DefaultStyles {
       sizeLarge: other.sizeLarge ?? sizeLarge,
       sizeHuge: other.sizeHuge ?? sizeHuge,
       palette: other.palette ?? palette,
+      bbcodeSpoilerV2: other.bbcodeSpoilerV2 ?? bbcodeSpoilerV2,
     );
   }
 }
