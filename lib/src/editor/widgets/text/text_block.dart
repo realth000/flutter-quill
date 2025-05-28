@@ -126,7 +126,7 @@ class EditableTextBlock extends StatelessWidget {
       return defaultStyles!.code!.decoration;
     }
 
-    if (attrs.containsKey('bbcodeSpoilerV2Header')) {
+    if (attrs.containsKey(BBCodeAttributeKeys.spoilerV2Header)) {
       return defaultStyles!.bbcodeSpoilerV2!.decoration;
     }
     return null;
@@ -359,7 +359,7 @@ class EditableTextBlock extends StatelessWidget {
         lineSpacing = defaultStyles!.code!.lineSpacing;
       } else if (attrs.containsKey(Attribute.align.key)) {
         lineSpacing = defaultStyles!.align!.lineSpacing;
-      } else if (attrs.containsKey('bbcodeSpoilerV2Header')) {
+      } else if (attrs.containsKey(BBCodeAttributeKeys.spoilerV2Header)) {
         lineSpacing = defaultStyles!.bbcodeSpoilerV2!.lineSpacing;
       } else {
         // use paragraph linespacing as a default

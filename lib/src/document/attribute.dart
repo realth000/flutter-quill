@@ -7,6 +7,14 @@ import 'custom_attributes.dart';
 
 export 'custom_attributes.dart';
 
+final class BBCodeAttributeKeys {
+  /// Delete the Constructor.
+  BBCodeAttributeKeys._();
+
+  static String spoilerV2Header = 'bbcodeSpoilerV2Header';
+  static String spoilerV2Body = 'bbcodeSpoilerV2Body';
+}
+
 enum AttributeScope {
   inline, // refer to https://quilljs.com/docs/formats/#inline
   block, // refer to https://quilljs.com/docs/formats/#block
@@ -152,7 +160,7 @@ class Attribute<T> {
     Attribute.indent.key,
     Attribute.direction.key,
     Attribute.lineHeight.key,
-    'bbcodeSpoilerV2Header',
+    BBCodeAttributeKeys.spoilerV2Header,
   });
 
   static final Set<String> blockKeysExceptHeader = LinkedHashSet.of({
@@ -163,7 +171,7 @@ class Attribute<T> {
     Attribute.lineHeight.key,
     Attribute.indent.key,
     Attribute.direction.key,
-    'bbcodeSpoilerV2Header',
+    BBCodeAttributeKeys.spoilerV2Header,
   });
 
   static final Set<String> exclusiveBlockKeys = LinkedHashSet.of({
@@ -171,7 +179,7 @@ class Attribute<T> {
     Attribute.list.key,
     Attribute.codeBlock.key,
     Attribute.blockQuote.key,
-    'bbcodeSpoilerV2Header',
+    BBCodeAttributeKeys.spoilerV2Header,
   });
 
   static final Set<String> embedKeys = {

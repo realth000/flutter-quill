@@ -407,7 +407,7 @@ class _TextLineState extends State<TextLine> {
       toMerge = defaultStyles.code!.style;
     } else if (block?.key == Attribute.list.key) {
       toMerge = defaultStyles.lists!.style;
-    } else if (block?.key == 'bbcodeSpoilerV2Header') {
+    } else if (block?.key == BBCodeAttributeKeys.spoilerV2Header) {
       toMerge = defaultStyles.bbcodeSpoilerV2!.style;
     }
 

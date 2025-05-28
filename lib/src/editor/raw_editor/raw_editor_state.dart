@@ -565,9 +565,10 @@ class QuillRawEditorState extends EditorState
           styles: _styles,
           enableInteractiveSelection: widget.config.enableInteractiveSelection,
           hasFocus: _hasFocus,
-          contentPadding: attrs.containsKey(Attribute.codeBlock.key) || attrs.containsKey('bbcodeSpoilerV2Header')
-              ? const EdgeInsets.all(16)
-              : null,
+          contentPadding:
+              attrs.containsKey(Attribute.codeBlock.key) || attrs.containsKey(BBCodeAttributeKeys.spoilerV2Header)
+                  ? const EdgeInsets.all(16)
+                  : null,
           embedBuilder: widget.config.embedBuilder,
           textSpanBuilder: widget.config.textSpanBuilder,
           linkActionPicker: _linkActionPicker,
@@ -713,7 +714,7 @@ class QuillRawEditorState extends EditorState
       return defaultStyles!.lists!.horizontalSpacing;
     } else if (attrs.containsKey(Attribute.align.key)) {
       return defaultStyles!.align!.horizontalSpacing;
-    } else if (attrs.containsKey('bbcodeSpoilerV2Header')) {
+    } else if (attrs.containsKey(BBCodeAttributeKeys.spoilerV2Header)) {
       return defaultStyles!.bbcodeSpoilerV2!.horizontalSpacing;
     }
     return HorizontalSpacing.zero;
@@ -731,7 +732,7 @@ class QuillRawEditorState extends EditorState
       return defaultStyles!.lists!.verticalSpacing;
     } else if (attrs.containsKey(Attribute.align.key)) {
       return defaultStyles!.align!.verticalSpacing;
-    } else if (attrs.containsKey('bbcodeSpoilerV2Header')) {
+    } else if (attrs.containsKey(BBCodeAttributeKeys.spoilerV2Header)) {
       return defaultStyles!.bbcodeSpoilerV2!.verticalSpacing;
     }
     return VerticalSpacing.zero;
