@@ -241,14 +241,16 @@ class EditableTextBlock extends StatelessWidget {
         if (isOrdered) {
           return defaultStyles.leading!.style.copyWith(
             fontSize: size,
-            color: fontColor,
+            // DISABLE font color
+            // color: fontColor,
           );
         }
         if (isUnordered) {
           return defaultStyles.leading!.style.copyWith(
             fontWeight: FontWeight.bold,
             fontSize: size,
-            color: fontColor,
+            // DISABLE font color
+            // color: fontColor,
           );
         }
         if (isCheck) {
